@@ -77,69 +77,140 @@ include __DIR__ . '/include/header.php';
       </ul>
     </div>
 
-    <!-- Animated Hero Illustration / Interactive Mockup -->
+    <!-- Animated Hero Illustration / High-Tech Interactive Dashboard -->
     <div class="relative lg:col-span-6">
-      <div class="glass fl rounded-2xl p-3 shadow-2xl">
-        <div class="overflow-hidden rounded-xl bg-[#0F1A3D]">
-          <div class="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
-            <i class="h-2.5 w-2.5 rounded-full bg-red-400"></i>
-            <i class="h-2.5 w-2.5 rounded-full bg-yellow-400"></i>
-            <i class="h-2.5 w-2.5 rounded-full bg-green-400"></i>
-            <span class="ml-3 flex-1 rounded bg-white/10 px-3 py-1 text-[11px] text-slate-400">vprovideservices.com</span>
-          </div>
-          <div class="grid grid-cols-12 gap-3 p-4">
-            <div class="col-span-3 space-y-2">
-              <i class="block h-2.5 rounded bg-white/20"></i>
-              <i class="block h-2.5 rounded bg-white/20"></i>
-              <i class="block h-2.5 rounded bg-white/20"></i>
-              <i class="block h-2.5 rounded bg-white/20"></i>
-              <i class="block h-2.5 rounded bg-white/20"></i>
+      <!-- Ambient Glow Orb Behind Main Card -->
+      <div class="absolute -inset-4 rounded-3xl bg-gradient-to-r from-brand/30 via-cyan/20 to-purple-600/30 blur-2xl animate-pulse-glow -z-10"></div>
+
+      <!-- Main High-Fidelity Glassmorphic Dashboard Window -->
+      <div class="glass fl rounded-2xl p-3 shadow-2xl border border-white/15 backdrop-blur-xl bg-[#0A122C]/85">
+        <div class="overflow-hidden rounded-xl bg-[#090F26] border border-white/10">
+          <!-- Window Header / Browser Chrome -->
+          <div class="flex items-center justify-between border-b border-white/10 px-4 py-3 bg-[#070D22]/90">
+            <div class="flex items-center gap-2">
+              <span class="h-3 w-3 rounded-full bg-rose-500/90 shadow-sm"></span>
+              <span class="h-3 w-3 rounded-full bg-amber-400/90 shadow-sm"></span>
+              <span class="h-3 w-3 rounded-full bg-emerald-400/90 shadow-sm"></span>
             </div>
-            <div class="col-span-9 space-y-3">
-              <div class="rounded-lg bg-gradient-to-r from-brand to-cyan p-4">
-                <i class="block h-3 w-2/3 rounded bg-white/90"></i>
-                <i class="mt-2 block h-2 w-1/2 rounded bg-white/60"></i>
-                <i class="mt-4 block h-6 w-20 rounded bg-cta"></i>
+            <div class="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-1 text-xs text-slate-300 font-mono border border-white/5">
+              <span class="material-symbols-outlined text-cyan text-sm">lock</span>
+              <span>vprovideservices.com/pipeline</span>
+            </div>
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-400 border border-emerald-500/20">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Live Systems
+            </span>
+          </div>
+
+          <!-- Dashboard Content -->
+          <div class="p-5 space-y-4">
+            <!-- Active Sprint Banner -->
+            <div class="rounded-xl bg-gradient-to-r from-brand/90 via-blue-600/90 to-cyan/80 p-4 shadow-lg text-white relative overflow-hidden">
+              <div class="absolute -right-6 -bottom-6 h-28 w-28 rounded-full bg-white/10 blur-xl"></div>
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-widest text-cyan-200">Global Operations</span>
+                  <h4 class="text-base font-bold font-display mt-0.5">Active Project Delivery Pipeline</h4>
+                </div>
+                <span class="rounded-lg bg-white/20 backdrop-blur-md px-2.5 py-1 text-xs font-bold font-mono">99.4% On-Time</span>
               </div>
-              <div class="grid grid-cols-3 gap-3">
-                <div class="grid h-16 place-items-center rounded-lg bg-white/5 text-cyan">
-                  <span class="material-symbols-outlined !text-2xl">code</span>
+              <!-- Progress bar -->
+              <div class="mt-3">
+                <div class="flex justify-between text-[11px] text-white/80 font-medium mb-1">
+                  <span>Sprint Velocity &amp; Milestones</span>
+                  <span>100% Quality Audited</span>
                 </div>
-                <div class="grid h-16 place-items-center rounded-lg bg-white/5 text-cyan">
-                  <span class="material-symbols-outlined !text-2xl">palette</span>
-                </div>
-                <div class="grid h-16 place-items-center rounded-lg bg-white/5 text-cyan">
-                  <span class="material-symbols-outlined !text-2xl">hub</span>
+                <div class="h-2 w-full rounded-full bg-black/25 overflow-hidden">
+                  <div class="h-full rounded-full bg-gradient-to-r from-cyan via-white to-amber-300" style="width: 94%"></div>
                 </div>
               </div>
-              <div class="flex h-20 items-end gap-1.5 rounded-lg bg-white/5 p-3">
-                <i class="block flex-1 rounded-t bg-gradient-to-t from-brand to-cyan" style="height:35%"></i>
-                <i class="block flex-1 rounded-t bg-gradient-to-t from-brand to-cyan" style="height:55%"></i>
-                <i class="block flex-1 rounded-t bg-gradient-to-t from-brand to-cyan" style="height:45%"></i>
-                <i class="block flex-1 rounded-t bg-gradient-to-t from-brand to-cyan" style="height:75%"></i>
-                <i class="block flex-1 rounded-t bg-gradient-to-t from-brand to-cyan" style="height:60%"></i>
-                <i class="block flex-1 rounded-t bg-gradient-to-t from-brand to-cyan" style="height:90%"></i>
-                <i class="block flex-1 rounded-t bg-gradient-to-t from-brand to-cyan" style="height:70%"></i>
-                <i class="block flex-1 rounded-t bg-gradient-to-t from-brand to-cyan" style="height:100%"></i>
+            </div>
+
+            <!-- 3 Capability Columns -->
+            <div class="grid grid-cols-3 gap-3">
+              <div class="rounded-xl bg-white/[0.04] p-3 border border-white/5 hover:border-cyan/30 transition-colors">
+                <div class="grid h-8 w-8 place-items-center rounded-lg bg-brand/20 text-cyan mb-2">
+                  <span class="material-symbols-outlined text-base">code</span>
+                </div>
+                <div class="text-xs font-bold text-white">Full-Stack</div>
+                <div class="text-[10px] text-slate-400 font-mono mt-0.5">PHP • Flutter</div>
+              </div>
+
+              <div class="rounded-xl bg-white/[0.04] p-3 border border-white/5 hover:border-cyan/30 transition-colors">
+                <div class="grid h-8 w-8 place-items-center rounded-lg bg-cyan/20 text-cyan mb-2">
+                  <span class="material-symbols-outlined text-base">palette</span>
+                </div>
+                <div class="text-xs font-bold text-white">UI/UX Craft</div>
+                <div class="text-[10px] text-slate-400 font-mono mt-0.5">Figma • 3D</div>
+              </div>
+
+              <div class="rounded-xl bg-white/[0.04] p-3 border border-white/5 hover:border-cyan/30 transition-colors">
+                <div class="grid h-8 w-8 place-items-center rounded-lg bg-emerald-500/20 text-emerald-400 mb-2">
+                  <span class="material-symbols-outlined text-base">analytics</span>
+                </div>
+                <div class="text-xs font-bold text-white">Analytics</div>
+                <div class="text-[10px] text-slate-400 font-mono mt-0.5">Python • BI</div>
+              </div>
+            </div>
+
+            <!-- Dynamic Activity Waveform / Chart -->
+            <div class="rounded-xl bg-white/[0.03] p-3.5 border border-white/5">
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-2.5">
+                <span class="font-medium">Continuous Deployment Activity</span>
+                <span class="font-mono text-[11px] text-cyan">24/7 Monitored</span>
+              </div>
+              <div class="flex h-16 items-end gap-2 px-1">
+                <div class="flex-1 rounded-t bg-gradient-to-t from-brand/60 to-cyan h-[45%] transition-all hover:brightness-125"></div>
+                <div class="flex-1 rounded-t bg-gradient-to-t from-brand/60 to-cyan h-[65%] transition-all hover:brightness-125"></div>
+                <div class="flex-1 rounded-t bg-gradient-to-t from-brand/60 to-cyan h-[50%] transition-all hover:brightness-125"></div>
+                <div class="flex-1 rounded-t bg-gradient-to-t from-brand/60 to-cyan h-[85%] transition-all hover:brightness-125"></div>
+                <div class="flex-1 rounded-t bg-gradient-to-t from-brand/60 to-cyan h-[70%] transition-all hover:brightness-125"></div>
+                <div class="flex-1 rounded-t bg-gradient-to-t from-brand/60 to-cyan h-[95%] transition-all hover:brightness-125"></div>
+                <div class="flex-1 rounded-t bg-gradient-to-t from-brand/60 to-cyan h-[80%] transition-all hover:brightness-125"></div>
+                <div class="flex-1 rounded-t bg-gradient-to-t from-brand/60 to-cyan h-[100%] transition-all hover:brightness-125"></div>
+                <div class="flex-1 rounded-t bg-gradient-to-t from-brand/60 to-cyan h-[90%] transition-all hover:brightness-125"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- Floating Badges -->
-      <div class="glass absolute -bottom-8 -left-2 w-28 rounded-[26px] p-2 shadow-2xl sm:-left-8">
-        <div class="rounded-[20px] bg-white p-2.5">
-          <i class="block h-14 rounded-lg bg-gradient-to-br from-brand to-cyan"></i>
-          <i class="mt-2 block h-2 w-3/4 rounded bg-slate-200"></i>
-          <i class="mt-1.5 block h-2 w-1/2 rounded bg-slate-200"></i>
-          <i class="mt-3 block h-5 rounded bg-cta"></i>
+
+      <!-- Floating Glass Badge 1 (Top-Right): Global Client Satisfaction -->
+      <div class="animate-float absolute -top-6 -right-3 sm:-right-6 z-20 rounded-2xl border border-white/15 bg-navy/90 p-3.5 shadow-2xl backdrop-blur-xl">
+        <div class="flex items-center gap-3">
+          <div class="grid h-10 w-10 place-items-center rounded-xl bg-amber-400/20 text-amber-300">
+            <span class="material-symbols-outlined text-xl">star</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-1 text-xs font-bold text-amber-300">
+              <span>★ 4.9 / 5.0</span>
+              <span class="text-[10px] text-slate-400 font-normal">(80+ Reviews)</span>
+            </div>
+            <div class="text-[11px] font-semibold text-white">Client Satisfaction Rating</div>
+          </div>
         </div>
       </div>
-      <div class="glass absolute -right-2 top-8 flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold shadow-xl sm:-right-6">
-        <span class="material-symbols-outlined text-cyan">draw</span> Brand Identity
+
+      <!-- Floating Glass Badge 2 (Bottom-Left): Turnaround Guarantee -->
+      <div class="animate-float-reverse absolute -bottom-6 -left-3 sm:-left-6 z-20 rounded-2xl border border-white/15 bg-navy/90 p-3.5 shadow-2xl backdrop-blur-xl">
+        <div class="flex items-center gap-3">
+          <div class="grid h-10 w-10 place-items-center rounded-xl bg-cyan/20 text-cyan">
+            <span class="material-symbols-outlined text-xl">bolt</span>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-white flex items-center gap-1.5">
+              <span>24h Turnaround</span>
+              <span class="h-2 w-2 rounded-full bg-cyan animate-pulse"></span>
+            </div>
+            <div class="text-[11px] text-slate-400">Detailed Scope &amp; Quote</div>
+          </div>
+        </div>
       </div>
-      <div class="glass absolute -right-2 bottom-12 flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold shadow-xl sm:-right-6">
-        <span class="material-symbols-outlined text-cyan">phone_iphone</span> Mobile Apps
+
+      <!-- Floating Glass Badge 3 (Right Middle): Full IP Ownership -->
+      <div class="animate-float absolute -right-2 bottom-16 sm:-right-8 z-20 hidden sm:flex items-center gap-2.5 rounded-xl border border-white/15 bg-navy/90 px-4 py-2.5 text-xs font-semibold text-white shadow-xl backdrop-blur-xl">
+        <span class="material-symbols-outlined text-emerald-400 text-lg">verified_user</span>
+        <span>100% IP &amp; Code Ownership</span>
       </div>
     </div>
   </div>
@@ -177,49 +248,83 @@ include __DIR__ . '/include/header.php';
   </div>
 </section>
 
-<!-- Dynamic Services Overview Section -->
+<!-- Dynamic Services Overview Section (Pixel-Perfect Alignment, No Numbers) -->
 <section id="services" class="bg-white py-20 lg:py-28">
   <div class="mx-auto max-w-[1280px] px-5 lg:px-8">
-    <div class="reveal mb-12 max-w-2xl mx-auto text-center">
-      <span class="text-xs font-bold uppercase tracking-[.2em] text-brand">What We Do</span>
-      <h2 class="mt-3 font-display text-3xl font-bold tracking-tight text-ink md:text-[40px] md:leading-tight">
-        Everything You Need to Launch, Brand &amp; Grow
+    <div class="reveal mb-14 max-w-2xl mx-auto text-center">
+      <span class="inline-flex items-center gap-2 rounded-full bg-brand/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[.2em] text-brand border border-brand/10">
+        Specialist Capabilities
+      </span>
+      <h2 class="mt-4 font-display text-3xl font-extrabold tracking-tight text-ink md:text-[42px] md:leading-tight">
+        Everything You Need to Launch, Brand &amp; Scale
       </h2>
-      <p class="mt-4 text-lg leading-8 text-muted">
-        Specialist capabilities loaded directly from MySQL, delivering end-to-end digital excellence.
+      <p class="mt-4 text-base md:text-lg leading-relaxed text-muted">
+        Tailored digital, engineering, and creative services loaded dynamically from MySQL, built for long-term reliability and high conversion.
       </p>
     </div>
 
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <!-- Pixel-Perfect Equal-Height Grid -->
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
       <?php if (!empty($services)): ?>
-        <?php foreach ($services as $idx => $s): 
-          $s_num = str_pad((string)($idx + 1), 2, '0', STR_PAD_LEFT);
-        ?>
-          <a href="service-details.php?slug=<?= urlencode($s['slug']) ?>" class="group reveal relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white p-7 transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-2xl hover:shadow-brand/10">
-            <span class="absolute right-5 top-4 font-display text-5xl font-extrabold text-slate-100 select-none"><?= $s_num ?></span>
-            <div class="relative">
-              <div class="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-brand to-cyan text-white shadow-lg shadow-brand/30">
-                <span class="material-symbols-outlined !text-2xl"><?= e($s['icon'] ?: 'code') ?></span>
+        <?php foreach ($services as $idx => $s): ?>
+          <div class="group reveal relative flex flex-col justify-between h-full overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-7 transition-all duration-300 hover:-translate-y-2 hover:border-brand/40 hover:shadow-2xl hover:shadow-brand/10">
+            <!-- Top Section: Icon & Category Badge -->
+            <div>
+              <div class="flex items-center justify-between">
+                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-brand to-cyan text-white shadow-lg shadow-brand/25 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                  <span class="material-symbols-outlined !text-2xl"><?= e($s['icon'] ?: 'code') ?></span>
+                </div>
+                <span class="rounded-full bg-soft px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-brand border border-brand/10">
+                  <?= e($s['category'] ?: 'Service') ?>
+                </span>
               </div>
-              <h3 class="mt-6 font-display text-xl font-semibold"><?= e($s['title']) ?></h3>
-              <p class="mt-3 text-sm leading-6 text-muted"><?= e($s['short_desc']) ?></p>
+
+              <!-- Title & Description (Consistent Line-Clamp & Heights) -->
+              <h3 class="mt-5 font-display text-xl font-bold text-ink group-hover:text-brand transition-colors line-clamp-1 min-h-[28px]">
+                <a href="service-details.php?slug=<?= urlencode($s['slug']) ?>" class="focus:outline-none">
+                  <?= e($s['title']) ?>
+                </a>
+              </h3>
+
+              <p class="mt-2.5 text-sm leading-relaxed text-muted line-clamp-2 min-h-[44px]">
+                <?= e($s['short_desc']) ?>
+              </p>
+
+              <!-- Feature Tags (Neat, Uniform Pills) -->
               <?php if (!empty($s['features'])): 
                 $feats = array_slice(explode(',', $s['features']), 0, 3);
               ?>
-                <p class="mt-4 text-xs font-semibold text-brand/80"><?= e(implode(' • ', array_map('trim', $feats))) ?></p>
+                <div class="mt-4 flex flex-wrap gap-1.5 min-h-[52px]">
+                  <?php foreach ($feats as $f): ?>
+                    <span class="inline-flex items-center gap-1 rounded-lg bg-slate-50 px-2.5 py-1 text-[11px] font-medium text-slate-600 border border-slate-100">
+                      <span class="material-symbols-outlined text-xs text-brand">check</span>
+                      <?= e(trim($f)) ?>
+                    </span>
+                  <?php endforeach; ?>
+                </div>
+              <?php else: ?>
+                <div class="mt-4 min-h-[52px]"></div>
               <?php endif; ?>
             </div>
-            <span class="relative mt-6 inline-flex items-center gap-1 text-sm font-semibold text-brand transition-all group-hover:gap-2">
-              Learn more <span class="material-symbols-outlined text-base">arrow_forward</span>
-            </span>
-          </a>
+
+            <!-- Bottom Action Bar (Uniformly Pushed to Base) -->
+            <div class="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
+              <a href="service-details.php?slug=<?= urlencode($s['slug']) ?>" class="inline-flex items-center gap-1.5 text-xs font-bold text-brand transition-all group-hover:gap-2">
+                <span>Explore Scope</span>
+                <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </a>
+              <a href="start-project.php?service=<?= urlencode($s['slug']) ?>" class="rounded-lg bg-soft px-3 py-1 text-xs font-semibold text-slate-700 transition hover:bg-cta hover:text-white">
+                Get Quote
+              </a>
+            </div>
+          </div>
         <?php endforeach; ?>
       <?php endif; ?>
     </div>
 
     <div class="mt-12 text-center">
-      <a href="services.php" class="inline-flex items-center gap-2 rounded-xl bg-soft px-8 py-4 font-semibold text-brand ring-1 ring-slate-200 transition hover:bg-brand hover:text-white">
-        Explore All Services <span class="material-symbols-outlined text-lg">arrow_forward</span>
+      <a href="services.php" class="inline-flex items-center gap-2 rounded-xl bg-soft px-8 py-4 font-semibold text-brand ring-1 ring-slate-200 transition-all duration-300 hover:bg-brand hover:text-white hover:shadow-lg hover:shadow-brand/20">
+        Explore All 10 Specialist Services <span class="material-symbols-outlined text-lg">arrow_forward</span>
       </a>
     </div>
   </div>

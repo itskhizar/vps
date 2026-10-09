@@ -57,45 +57,48 @@ include __DIR__ . '/include/header.php';
     <?php endif; ?>
 
     <!-- Services Grid -->
-    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
       <?php if (!empty($services)): ?>
         <?php foreach ($services as $idx => $s): 
           $cat_slug = slugify($s['category'] ?? 'general');
         ?>
-          <div data-cat="<?= e($cat_slug) ?>" class="svc-card group reveal relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white p-8 transition duration-300 hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-2xl hover:shadow-brand/10">
+          <div data-cat="<?= e($cat_slug) ?>" class="svc-card group reveal relative flex flex-col justify-between h-full overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-8 transition-all duration-300 hover:-translate-y-2 hover:border-brand/40 hover:shadow-2xl hover:shadow-brand/10">
             <div>
               <div class="flex items-center justify-between">
-                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-brand to-cyan text-white shadow-lg shadow-brand/30">
+                <div class="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-brand to-cyan text-white shadow-lg shadow-brand/25 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                   <span class="material-symbols-outlined !text-2xl"><?= e($s['icon'] ?: 'code') ?></span>
                 </div>
-                <span class="rounded-full bg-soft px-3 py-1 text-xs font-semibold text-brand"><?= e($s['category']) ?></span>
+                <span class="rounded-full bg-soft px-3 py-1 text-xs font-bold uppercase tracking-wider text-brand border border-brand/10"><?= e($s['category']) ?></span>
               </div>
 
-              <h2 class="mt-6 font-display text-2xl font-bold text-ink group-hover:text-brand transition-colors">
-                <a href="service-details.php?slug=<?= urlencode($s['slug']) ?>"><?= e($s['title']) ?></a>
+              <h2 class="mt-6 font-display text-2xl font-bold text-ink group-hover:text-brand transition-colors line-clamp-1 min-h-[32px]">
+                <a href="service-details.php?slug=<?= urlencode($s['slug']) ?>" class="focus:outline-none"><?= e($s['title']) ?></a>
               </h2>
 
-              <p class="mt-3 text-sm leading-6 text-muted">
+              <p class="mt-3 text-sm leading-relaxed text-muted line-clamp-3 min-h-[60px]">
                 <?= e($s['short_desc']) ?>
               </p>
 
               <?php if (!empty($s['features'])): 
                 $feats = array_slice(explode(',', $s['features']), 0, 4);
               ?>
-                <ul class="mt-6 space-y-2 border-t border-slate-100 pt-5 text-xs text-slate-600">
+                <ul class="mt-6 space-y-2.5 border-t border-slate-100 pt-5 text-xs text-slate-600 min-h-[110px]">
                   <?php foreach ($feats as $f): ?>
-                    <li class="flex items-center gap-2">
-                      <span class="material-symbols-outlined text-cyan text-sm">check</span>
-                      <span><?= e(trim($f)) ?></span>
+                    <li class="flex items-center gap-2.5">
+                      <span class="material-symbols-outlined text-cyan text-sm">check_circle</span>
+                      <span class="font-medium"><?= e(trim($f)) ?></span>
                     </li>
                   <?php endforeach; ?>
                 </ul>
+              <?php else: ?>
+                <div class="mt-6 min-h-[110px]"></div>
               <?php endif; ?>
             </div>
 
             <div class="mt-8 flex items-center justify-between border-t border-slate-100 pt-5">
-              <a href="service-details.php?slug=<?= urlencode($s['slug']) ?>" class="inline-flex items-center gap-1 text-sm font-semibold text-brand transition group-hover:gap-2">
-                Details &amp; Scope <span class="material-symbols-outlined text-base">arrow_forward</span>
+              <a href="service-details.php?slug=<?= urlencode($s['slug']) ?>" class="inline-flex items-center gap-1.5 text-sm font-bold text-brand transition-all group-hover:gap-2">
+                <span>Details &amp; Scope</span>
+                <span class="material-symbols-outlined text-base">arrow_forward</span>
               </a>
               <a href="start-project.php?service=<?= urlencode($s['slug']) ?>" class="rounded-lg bg-soft px-3.5 py-1.5 text-xs font-semibold text-ink transition hover:bg-cta hover:text-white">
                 Get Quote

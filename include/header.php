@@ -5,13 +5,21 @@
 require_once __DIR__ . '/functions.php';
 
 $page_title = $page_title ?? get_setting('meta_title', 'VPS | V Provide Services: Web, App, Design, Data & Architecture Solutions Worldwide');
-$page_desc  = $page_desc ?? get_setting('meta_description', 'VPS is a global IT and creative services partner: web and app development, graphic and logo design, ecommerce management, data science, architecture and interior design.');
+$page_desc  = $page_desc ?? get_setting('meta_description', 'VPS is a premier global digital agency providing high-performance website development, mobile apps, graphic design, branding, ecommerce management, data analytics, and 3D architectural visualization.');
+$page_keywords = $page_keywords ?? 'VPS, V Provide Services, web development company Pakistan, mobile app development, UI UX design, ecommerce management, data science, architectural 3D rendering, Flutter apps, PHP developers';
 $current_page = basename($_SERVER['PHP_SELF'], '.php');
 if ($current_page === 'index') $current_page = 'home';
 $contact_phone = get_setting('contact_phone', '03328912706');
 $contact_whatsapp = get_setting('contact_whatsapp', '+92 332 8912706');
 $clean_whatsapp = preg_replace('/[^0-9]/', '', $contact_whatsapp);
-$is_solid_header = $is_solid_header ?? false; // For inner pages that do not have dark hero background
+$is_solid_header = $is_solid_header ?? false;
+
+// Canonical URL Resolution
+$protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https" : "http";
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$req_uri = strtok($_SERVER["REQUEST_URI"] ?? '/', '?');
+$canonical_url = $canonical_url ?? ($protocol . "://" . $host . $req_uri);
+$og_image = $og_image ?? ($protocol . "://" . $host . "/vprovideservices/images/logo.png");
 ?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -19,7 +27,76 @@ $is_solid_header = $is_solid_header ?? false; // For inner pages that do not hav
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title><?= e($page_title) ?></title>
+  
+  <!-- Comprehensive Technical & On-Page SEO -->
   <meta name="description" content="<?= e($page_desc) ?>">
+  <meta name="keywords" content="<?= e($page_keywords) ?>">
+  <meta name="author" content="V Provide Services (VPS)">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="<?= e($canonical_url) ?>">
+  
+  <!-- Geo Meta Tags for Regional & Global Search -->
+  <meta name="geo.region" content="PK-IS">
+  <meta name="geo.placename" content="Islamabad, Pakistan">
+  <meta name="geo.position" content="33.6844;73.0479">
+  <meta name="ICBM" content="33.6844, 73.0479">
+  
+  <!-- Open Graph / Facebook Protocol -->
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="<?= $og_type ?? 'website' ?>">
+  <meta property="og:site_name" content="VPS — V Provide Services">
+  <meta property="og:title" content="<?= e($page_title) ?>">
+  <meta property="og:description" content="<?= e($page_desc) ?>">
+  <meta property="og:url" content="<?= e($canonical_url) ?>">
+  <meta property="og:image" content="<?= e($og_image) ?>">
+  <meta property="og:image:alt" content="VPS Digital Services Worldwide">
+  
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@vprovideservices">
+  <meta name="twitter:title" content="<?= e($page_title) ?>">
+  <meta name="twitter:description" content="<?= e($page_desc) ?>">
+  <meta name="twitter:image" content="<?= e($og_image) ?>">
+  
+  <!-- Schema.org JSON-LD Structured Data for Top Search Engine Ranking -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "VPS — V Provide Services",
+    "url": "<?= e($canonical_url) ?>",
+    "logo": "<?= e($og_image) ?>",
+    "description": "<?= e($page_desc) ?>",
+    "telephone": "+923328912706",
+    "email": "devworkspace3300@gmail.com",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Islamabad",
+      "addressCountry": "PK"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 33.6844,
+      "longitude": 73.0479
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "sameAs": [
+      "https://wa.me/923328912706"
+    ]
+  }
+  </script>
+  <?php if (!empty($schema_json)): ?>
+  <script type="application/ld+json">
+  <?= $schema_json ?>
+  </script>
+  <?php endif; ?>
+
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpolygon points='4,4 14,4 20,13.75 20,30' fill='%230A1128'/%3E%3Cpolygon points='36,4 26,4 20,13.75 20,30' fill='%232F54EB'/%3E%3Ccircle cx='20' cy='35' r='3.2' fill='%23FF7A1A'/%3E%3C/svg%3E">
   
   <!-- Fonts -->
@@ -70,22 +147,53 @@ $is_solid_header = $is_solid_header ?? false; // For inner pages that do not hav
       background: #FF7A1A;
       color: #fff;
       box-shadow: 0 10px 24px rgba(255, 122, 26, .35);
-      transition: .25s ease;
+      transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .btn-cta:hover {
       background: #E6680C;
       transform: translateY(-2px);
       box-shadow: 0 14px 28px rgba(255, 122, 26, .45);
     }
+    
+    /* Smooth Scroll Reveals */
     .reveal {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .7s ease, transform .7s ease;
+      transform: translateY(28px);
+      transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
     }
     .reveal.in {
       opacity: 1;
-      transform: none;
+      transform: translateY(0);
     }
+    .delay-100 { transition-delay: 100ms; }
+    .delay-150 { transition-delay: 150ms; }
+    .delay-200 { transition-delay: 200ms; }
+    .delay-300 { transition-delay: 300ms; }
+    .delay-400 { transition-delay: 400ms; }
+
+    /* Custom Animation Keyframes */
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes float-reverse {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.06); }
+    }
+    @keyframes radar-ping {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+    .animate-float { animation: float-slow 5s ease-in-out infinite; }
+    .animate-float-reverse { animation: float-reverse 6s ease-in-out infinite; }
+    .animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+    .animate-radar { animation: radar-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+
     :focus-visible {
       outline: 3px solid #14C8E8;
       outline-offset: 2px;

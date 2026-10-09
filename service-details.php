@@ -44,6 +44,22 @@ $page_title = (!empty($service['meta_title'])) ? $service['meta_title'] : $servi
 $page_desc  = (!empty($service['meta_desc'])) ? $service['meta_desc'] : $service['short_desc'];
 $is_solid_header = false;
 
+// Schema.org Service Structured Data for Search Engines
+$schema_json = json_encode([
+    "@context" => "https://schema.org",
+    "@type" => "Service",
+    "name" => $service['title'],
+    "serviceType" => $service['category'],
+    "description" => $service['short_desc'],
+    "provider" => [
+        "@type" => "ProfessionalService",
+        "name" => "VPS — V Provide Services",
+        "url" => "https://vprovideservices.com",
+        "telephone" => "+923328912706"
+    ],
+    "areaServed" => "Worldwide"
+], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+
 include __DIR__ . '/include/header.php';
 ?>
 

@@ -135,12 +135,25 @@ try {
   </footer>
 
   <!-- Floating WhatsApp Quick Button -->
-  <a href="https://wa.me/<?= e($clean_whatsapp) ?>" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" class="fixed bottom-5 right-5 z-40 grid h-14 w-14 place-items-center rounded-full bg-green-500 text-white shadow-2xl transition hover:scale-110 hover:bg-green-600">
-    <svg class="h-8 w-8 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.074-1.995-.465-1.667-.688-2.73-2.39-2.812-2.502-.084-.112-.676-.901-.676-1.718 0-.816.425-1.218.577-1.385.151-.167.33-.21.441-.21.111 0 .222.002.319.006.104.004.243-.039.38.291.144.347.491 1.2.534 1.288.043.088.072.191.014.305-.058.115-.088.188-.174.288-.088.101-.184.225-.264.303-.088.086-.18.18-.077.357.103.176.458.756.983 1.224.675.602 1.244.788 1.421.876.176.088.28.073.383-.045.104-.117.442-.515.56-.692.119-.176.237-.147.399-.088.163.059 1.033.487 1.21.575.176.088.293.132.336.206.044.073.044.426-.1 1.031zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.436 5.176L2 22l4.981-1.309A9.957 9.957 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+  <a href="https://wa.me/<?= e($clean_whatsapp) ?>?text=Hi%20VPS%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" aria-label="Chat with VPS on WhatsApp" class="group fixed bottom-5 right-5 z-40 flex items-center gap-2">
+    <!-- Interactive Tooltip Pill -->
+    <span class="pointer-events-none hidden rounded-full bg-navy/95 px-3.5 py-2 text-xs font-semibold text-white shadow-xl ring-1 ring-white/10 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 sm:flex sm:items-center sm:gap-2">
+      <span class="h-2 w-2 rounded-full bg-[#25D366] animate-pulse"></span>
+      <span>Chat on WhatsApp</span>
+    </span>
+    
+    <!-- Button with Radar Pulse -->
+    <div class="relative grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_rgba(37,211,102,0.45)] transition-all duration-300 hover:scale-110 hover:shadow-[0_12px_35px_rgba(37,211,102,0.6)]">
+      <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#25D366] opacity-30"></span>
+      <!-- Official WhatsApp SVG Icon -->
+      <svg class="relative h-8 w-8 fill-white" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.79 14.07c-.24.68-1.39 1.3-1.95 1.38-.52.08-1.16.12-3.33-.78-2.77-1.15-4.55-3.99-4.69-4.17-.14-.19-1.13-1.5-1.13-2.87 0-1.37.71-2.04.96-2.32.25-.28.55-.35.73-.35.19 0 .37 0 .53.01.17.01.41-.06.63.49.24.58.82 2 .89 2.15.07.15.12.32.02.51-.1.2-.15.31-.29.48-.15.17-.31.38-.44.51-.15.15-.3.3-.13.6.17.29.76 1.26 1.64 2.04 1.13 1.01 2.08 1.32 2.37 1.47.3.15.47.12.64-.08.18-.2.76-.88.96-1.18.2-.3.4-.25.68-.15.28.1 1.77.83 2.07.98.3.15.5.22.58.35.07.13.07.72-.17 1.4z"/>
+      </svg>
+    </div>
   </a>
 
   <!-- Floating Scroll To Top -->
-  <button id="toTop" aria-label="Back to top" class="fixed bottom-24 right-5 z-40 hidden h-12 w-12 place-items-center rounded-full bg-brand text-white shadow-xl transition hover:bg-navy">
+  <button id="toTop" aria-label="Back to top" class="fixed bottom-24 right-5 z-40 hidden h-12 w-12 place-items-center rounded-full bg-brand text-white shadow-xl transition-all duration-300 hover:bg-navy hover:scale-105">
     <span class="material-symbols-outlined">arrow_upward</span>
   </button>
 
@@ -174,7 +187,7 @@ try {
         toTop.classList.toggle('grid', window.scrollY >= 400);
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
     if (menuBtn && mobMenu) {
@@ -189,7 +202,8 @@ try {
       toTop.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Scroll reveal observer
+    // High-performance Scroll Reveal Observer
+    const reveals = $$q('.reveal');
     const ioReveal = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -197,8 +211,17 @@ try {
           ioReveal.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
-    $$q('.reveal').forEach(el => ioReveal.observe(el));
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    
+    reveals.forEach(el => {
+      // If already in viewport on load, reveal immediately
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('in');
+      } else {
+        ioReveal.observe(el);
+      }
+    });
 
     // Stats counter animation
     const statsSec = $q('#stats');

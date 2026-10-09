@@ -44,6 +44,28 @@ $page_title = (!empty($post['meta_title'])) ? $post['meta_title'] : $post['title
 $page_desc  = (!empty($post['meta_desc'])) ? $post['meta_desc'] : $post['excerpt'];
 $is_solid_header = false;
 
+// Schema.org BlogPosting Structured Data
+$schema_json = json_encode([
+    "@context" => "https://schema.org",
+    "@type" => "BlogPosting",
+    "headline" => $post['title'],
+    "description" => $post['excerpt'],
+    "author" => [
+        "@type" => "Person",
+        "name" => $post['author'] ?: "VPS Engineering Team"
+    ],
+    "publisher" => [
+        "@type" => "Organization",
+        "name" => "VPS — V Provide Services",
+        "url" => "https://vprovideservices.com"
+    ],
+    "datePublished" => $post['published_at'] ?? date('c'),
+    "mainEntityOfPage" => [
+        "@type" => "WebPage",
+        "@id" => $canonical_url ?? "https://vprovideservices.com/blog-post.php"
+    ]
+], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+
 include __DIR__ . '/include/header.php';
 ?>
 

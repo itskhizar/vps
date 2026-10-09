@@ -15,10 +15,10 @@ if (empty($slug) && $id <= 0) {
 try {
     $db = get_db();
     if (!empty($slug)) {
-        $stmt = $db->prepare("SELECT * FROM portfolio WHERE slug = ? AND is_published = 1 LIMIT 1");
+        $stmt = $db->prepare("SELECT p.*, s.title AS service_title, s.slug AS service_slug FROM portfolio p LEFT JOIN services s ON p.service_id = s.id WHERE p.slug = ? AND p.is_published = 1 LIMIT 1");
         $stmt->execute([$slug]);
     } else {
-        $stmt = $db->prepare("SELECT * FROM portfolio WHERE id = ? AND is_published = 1 LIMIT 1");
+        $stmt = $db->prepare("SELECT p.*, s.title AS service_title, s.slug AS service_slug FROM portfolio p LEFT JOIN services s ON p.service_id = s.id WHERE p.id = ? AND p.is_published = 1 LIMIT 1");
         $stmt->execute([$id]);
     }
     $project = $stmt->fetch();
@@ -43,6 +43,20 @@ try {
 $page_title = (!empty($project['meta_title'])) ? $project['meta_title'] : $project['title'] . " | Case Study - VPS";
 $page_desc  = (!empty($project['meta_desc'])) ? $project['meta_desc'] : $project['short_desc'];
 $is_solid_header = false;
+
+// Schema.org CreativeWork JSON-LD
+$schema_json = json_encode([
+    "@context" => "https://schema.org",
+    "@type" => "CreativeWork",
+    "name" => $project['title'],
+    "headline" => $project['title'],
+    "description" => $project['short_desc'],
+    "provider" => [
+        "@type" => "Organization",
+        "name" => "VPS — V Provide Services",
+        "url" => "https://vprovideservices.com"
+    ]
+], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
 
 include __DIR__ . '/include/header.php';
 ?>
@@ -151,9 +165,16 @@ include __DIR__ . '/include/header.php';
               <span class="text-muted">Industry</span>
               <span class="font-semibold text-ink"><?= e($project['industry'] ?: 'Digital Enterprise') ?></span>
             </li>
-            <li class="flex justify-between pt-3">
-              <span class="text-muted">Category</span>
-              <span class="font-semibold text-brand uppercase"><?= e($project['category']) ?></span>
+            <li class="flex justify-between pt-3 items-center">
+              <span class="text-muted">Related Service</span>
+              <?php if (!empty($project['service_slug'])): ?>
+                <a href="service-details.php?slug=<?= e($project['service_slug']) ?>" class="font-bold text-brand hover:underline inline-flex items-center gap-1">
+                  <span><?= e($project['service_title']) ?></span>
+                  <span class="material-symbols-outlined text-xs">open_in_new</span>
+                </a>
+              <?php else: ?>
+                <span class="font-bold text-brand uppercase"><?= e($project['category']) ?></span>
+              <?php endif; ?>
             </li>
             <?php if (!empty($project['technologies'])): ?>
               <li class="pt-3">
@@ -164,7 +185,7 @@ include __DIR__ . '/include/header.php';
             <?php if (!empty($project['project_url'])): ?>
               <li class="pt-3">
                 <span class="text-muted block mb-1">Live URL</span>
-                <a href="<?= e($project['project_url']) ?>" target="_blank" rel="noopener" class="font-semibold text-brand underline truncate block"><?= e($project['project_url']) ?></a>
+                <a href="<?= e($project['project_url']) ?>" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand underline truncate block"><?= e($project['project_url']) ?></a>
               </li>
             <?php endif; ?>
           </ul>

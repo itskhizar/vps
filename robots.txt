@@ -4,4 +4,4 @@ Disallow: /admin/
 Disallow: /uploads/attachments/
 Disallow: /include/
 
-Sitemap: http://localhost/sitemap.xml
+Sitemap: https://vprovideservices.com/sitemap.xml

@@ -17,12 +17,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $action = trim($_POST['action'] ?? '');
 
-    // Save Portfolio
+    // Save Portfolio with Dynamic Service Linkage
     if ($action === 'save_portfolio') {
         $p_id         = (int)($_POST['portfolio_id'] ?? 0);
         $title        = trim($_POST['title'] ?? '');
         $slug         = slugify($_POST['slug'] ?? $title);
-        $category     = trim($_POST['category'] ?? 'web');
+        $service_id   = (int)($_POST['service_id'] ?? 0);
+        
+        // Lookup dynamic service title for category
+        $category = 'General';
+        if ($service_id > 0) {
+            $stmt_s = $db->prepare("SELECT title FROM services WHERE id = ?");
+            $stmt_s->execute([$service_id]);
+            $category = $stmt_s->fetchColumn() ?: 'General';
+        } else {
+            $category = trim($_POST['category'] ?? 'General');
+        }
+
         $client_name  = trim($_POST['client_name'] ?? '');
         $industry     = trim($_POST['industry'] ?? '');
         $technologies = trim($_POST['technologies'] ?? '');
@@ -51,16 +62,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 if ($p_id > 0) {
                     if ($featured_img_path) {
-                        $stmt = $db->prepare("UPDATE portfolio SET title = ?, slug = ?, category = ?, client_name = ?, industry = ?, technologies = ?, short_desc = ?, challenge = ?, solution = ?, results = ?, project_url = ?, is_featured = ?, is_published = ?, featured_image = ? WHERE id = ?");
-                        $stmt->execute([$title, $slug, $category, $client_name, $industry, $technologies, $short_desc, $challenge, $solution, $results, $project_url, $is_feat, $is_pub, $featured_img_path, $p_id]);
+                        $stmt = $db->prepare("UPDATE portfolio SET title = ?, slug = ?, category = ?, service_id = ?, client_name = ?, industry = ?, technologies = ?, short_desc = ?, challenge = ?, solution = ?, results = ?, project_url = ?, is_featured = ?, is_published = ?, featured_image = ? WHERE id = ?");
+                        $stmt->execute([$title, $slug, $category, $service_id, $client_name, $industry, $technologies, $short_desc, $challenge, $solution, $results, $project_url, $is_feat, $is_pub, $featured_img_path, $p_id]);
                     } else {
-                        $stmt = $db->prepare("UPDATE portfolio SET title = ?, slug = ?, category = ?, client_name = ?, industry = ?, technologies = ?, short_desc = ?, challenge = ?, solution = ?, results = ?, project_url = ?, is_featured = ?, is_published = ? WHERE id = ?");
-                        $stmt->execute([$title, $slug, $category, $client_name, $industry, $technologies, $short_desc, $challenge, $solution, $results, $project_url, $is_feat, $is_pub, $p_id]);
+                        $stmt = $db->prepare("UPDATE portfolio SET title = ?, slug = ?, category = ?, service_id = ?, client_name = ?, industry = ?, technologies = ?, short_desc = ?, challenge = ?, solution = ?, results = ?, project_url = ?, is_featured = ?, is_published = ? WHERE id = ?");
+                        $stmt->execute([$title, $slug, $category, $service_id, $client_name, $industry, $technologies, $short_desc, $challenge, $solution, $results, $project_url, $is_feat, $is_pub, $p_id]);
                     }
                     set_flash('success', "Case study updated.");
                 } else {
-                    $stmt = $db->prepare("INSERT INTO portfolio (title, slug, category, client_name, industry, technologies, short_desc, challenge, solution, results, project_url, is_featured, is_published, featured_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->execute([$title, $slug, $category, $client_name, $industry, $technologies, $short_desc, $challenge, $solution, $results, $project_url, $is_feat, $is_pub, $featured_img_path]);
+                    $stmt = $db->prepare("INSERT INTO portfolio (title, slug, category, service_id, client_name, industry, technologies, short_desc, challenge, solution, results, project_url, is_featured, is_published, featured_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->execute([$title, $slug, $category, $service_id, $client_name, $industry, $technologies, $short_desc, $challenge, $solution, $results, $project_url, $is_feat, $is_pub, $featured_img_path]);
                     set_flash('success', "Case study created.");
                 }
             } catch (Exception $e) {
@@ -96,9 +107,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Fetch all studies
+// Fetch all studies and active services
 try {
-    $studies = $db->query("SELECT * FROM portfolio ORDER BY id DESC")->fetchAll();
+    $studies = $db->query("SELECT p.*, s.title AS service_title FROM portfolio p LEFT JOIN services s ON p.service_id = s.id ORDER BY p.id DESC")->fetchAll();
+    $services_list = $db->query("SELECT id, title, slug, category FROM services WHERE is_active = 1 ORDER BY display_order ASC")->fetchAll();
     $editing_item = null;
     if ($edit_id > 0) {
         $stmt_ed = $db->prepare("SELECT * FROM portfolio WHERE id = ?");
@@ -107,6 +119,7 @@ try {
     }
 } catch (Exception $e) {
     $studies = [];
+    $services_list = [];
     $editing_item = null;
 }
 ?>
@@ -200,13 +213,13 @@ try {
           <input type="text" name="title" required value="<?= e($editing_item['title'] ?? '') ?>" class="w-full rounded-xl border border-slate-200 px-3.5 py-2 text-ink">
         </div>
         <div>
-          <label class="block font-bold text-muted uppercase mb-1">Category *</label>
-          <select name="category" class="w-full rounded-xl border border-slate-200 px-3 py-2 text-ink bg-white font-semibold">
-            <?php 
-            $cats = ['web' => 'Web Development', 'app' => 'Mobile App', 'brand' => 'Branding', 'shop' => 'Ecommerce', 'data' => 'Data Science', 'arch' => 'Architecture & 3D'];
-            foreach ($cats as $k => $v): 
-            ?>
-              <option value="<?= $k ?>" <?= ($editing_item['category'] ?? '') === $k ? 'selected' : '' ?>><?= $v ?></option>
+          <label class="block font-bold text-muted uppercase mb-1">Related Service / Category *</label>
+          <select name="service_id" required class="w-full rounded-xl border border-slate-200 px-3 py-2 text-ink bg-white font-semibold">
+            <option value="">-- Choose Relevant Service --</option>
+            <?php foreach ($services_list as $sl): ?>
+              <option value="<?= $sl['id'] ?>" <?= (($editing_item['service_id'] ?? 0) == $sl['id'] || ($editing_item['category'] ?? '') === $sl['title']) ? 'selected' : '' ?>>
+                <?= e($sl['title']) ?> (<?= e($sl['category']) ?>)
+              </option>
             <?php endforeach; ?>
           </select>
         </div>
