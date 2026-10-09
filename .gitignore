@@ -1,0 +1,20 @@
+# Operating System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# IDE and Editor Directories
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Test and Scratch Scripts
+test_*.php
+scratch/
+
+# User Uploaded Attachments (retain directory with .gitkeep)
+uploads/attachments/*
+!uploads/attachments/.gitkeep

@@ -1,0 +1,27 @@
+# ==============================================================
+# VPS Apache Configuration & Clean URL Routing
+# ==============================================================
+
+Options -Indexes +FollowSymLinks
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Block access to hidden files and SQL directories
+    RewriteRule ^include/sqls/ - [F,L]
+    RewriteRule ^uploads/attachments/(.*\.php) - [F,L]
+
+    # Clean URL Rewrites for Public Pages (optional)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}\.php -f
+    RewriteRule ^([^\.]+)$ $1.php [NC,L]
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
